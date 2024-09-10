@@ -1,0 +1,113 @@
+---
+title: "Course section comparisons"
+author: "Stephan Koenig"
+format:
+  revealjs:
+    highlight-style: ayu
+    scrollable: true
+    embed-resources: true
+
+editor_options:
+  markdown:
+    wrap: sentence
+---
+
+## Setup {visibility="hidden"}
+
+```{r}
+#| label: setup
+#| echo: false
+#| message: false
+
+library(conflicted)
+library(dplyr)
+conflicts_prefer(dplyr::filter)
+library(ggplot2)
+library(here)
+
+source(here("R", "functions.R"))
+cpsc_courses <- load_cpsc_files(here("data", "tableau-dashboard-v2")) |>
+    filter(
+    subject == "CPSC",
+    !section %in% c("1CH", "V01")
+    ) |>
+  mutate(
+    term = case_match(
+      section,
+      c("101", "102", "103", "104") ~ "W1",
+      c("201", "202", "203", "204") ~ "W2",
+      "911" ~ "S1",
+      "921" ~ "S2"
+    )
+  )
+```
+
+Create symlinks to a local copy of the [unoffical UBC PAIR grade data repository](https://github.com/DonneyF/ubc-pair-grade-data/tree/master):
+
+Linux/macOS
+
+``` bash
+ln -s <local-path-to-data-repo> <local-path-to-this-repo>/data
+```
+
+Windows
+
+``` powershell
+mklink <local-path-to-this-repo>\data <local-path-to-data-repo>
+```
+
+## CPSC 100
+
+```{r}
+#| label: fig-cpsc-100
+
+plot_cpsc_course_comparison(cpsc_courses, "100")
+```
+
+## CPSC 103
+
+```{r}
+#| label: fig-cpsc-103
+
+plot_cpsc_course_comparison(cpsc_courses, "103")
+```
+
+## CPSC 107
+
+```{r}
+#| label: fig-cpsc-107
+
+plot_cpsc_course_comparison(cpsc_courses, "107")
+```
+
+## CPSC 110
+
+```{r}
+#| label: fig-cpsc-110
+
+plot_cpsc_course_comparison(cpsc_courses, "110")
+```
+
+## CPSC 121
+
+```{r}
+#| label: fig-cpsc-121
+
+plot_cpsc_course_comparison(cpsc_courses, "121")
+```
+
+## CPSC 210
+
+```{r}
+#| label: fig-cpsc-210
+
+plot_cpsc_course_comparison(cpsc_courses, "210")
+```
+
+## CPSC 221
+
+```{r}
+#| label: fig-cpsc-221
+
+plot_cpsc_course_comparison(cpsc_courses, "221")
+```
