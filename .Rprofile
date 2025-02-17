@@ -1,7 +1,8 @@
 # Use Posit Package Manager
 options(
-  repos = c(CRAN = "https://p3m.dev/cran/latest"),
-  renv.config.pak.enabled = TRUE
+  renv.config.pak.enabled = TRUE,
+  renv.config.ppm.enabled = TRUE,
+  renv.config.ppm.default = TRUE
 )
 
 # Use renv
